@@ -24,6 +24,6 @@ for the purpose of helping the colleagues working on the BA-APOK project to sum 
 
 ## Screenshots
 
-![screen 1] (img/screen_1.png) 
-![screen 2] (img/screen_2.png)
+![screen 1] (img/screen_1.png =250x) 
+![screen 2] (img/screen_2.png =250x)
 
