@@ -1,7 +1,7 @@
 # BA-GGR
 
-This is a simple multi-platform HTML5 mobile application developed with ionic framework v2 and angularjs 2
-for the purpose of helping the colleagues working on the BA-APOK project to sum up their consumption in the kitchen.
+This is a multi-platform HTML5 mobile application developed with ionic framework v2 and angularjs 2
+to track and sum up the consumption of different beverages in the kitchen.
 
 ## Installation
 
