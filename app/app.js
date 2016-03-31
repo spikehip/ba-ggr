@@ -1,19 +1,17 @@
 import {App, Platform} from 'ionic-framework/ionic';
 import {TabsPage} from './pages/tabs/tabs';
+import {Drinks} from './providers/drinks';
 
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
+  providers: [Drinks],
   config: {
   } // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class MyApp {
   static get parameters() {
     return [[Platform]];
-  }
-
-  balance() {
-    return 100;
   }
 
   constructor(platform) {
