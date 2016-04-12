@@ -8,18 +8,45 @@
 <ion-content class="page3">
 	<ion-slides pager>
 		<ion-slide>
-			<h2>Top der Woche</h2>
-			<ion-item>
-			  <ion-icon name="podium" item-left></ion-icon>  				
-			  {{topName}}
-  			  <ion-badge item-right danger>{{topCount}}</ion-badge>
-			</ion-item>
+			<h2>Top 3 der Woche</h2>
+			<div [hidden]="!statsAvailable">
+				<ion-item>
+				  <ion-icon name="podium" item-left></ion-icon>  				
+				  {{drinks[0].title}}
+	  			  <ion-badge item-right danger>{{drinks[0].consumed}}</ion-badge>
+				</ion-item>
+				<ion-item [hidden]="drinks[1].consumed < 1">
+				  <ion-icon name="podium" item-left></ion-icon>  				
+				  {{drinks[1].title}}
+	  			  <ion-badge item-right secondary>{{drinks[1].consumed}}</ion-badge>
+				</ion-item>
+				<ion-item [hidden]="drinks[2].consumed < 1">
+				  <ion-icon name="podium" item-left></ion-icon>  				
+				  {{drinks[2].title}}
+	  			  <ion-badge item-right >{{drinks[2].consumed}}</ion-badge>
+				</ion-item>
+			</div>
+			<div [hidden]="statsAvailable">
+				<small>Leider stehen ungenügende Daten zu Verfügung.</small>
+			</div>
 		</ion-slide>
 		<ion-slide>
 			<h2>Übersicht Woche</h2>
+			<div [hidden]="!stats2Available">
+				<small>Hier kommen die Statistiken.</small>
+			</div>
+			<div [hidden]="stats2Available">
+				<small>Leider stehen ungenügende Daten zu Verfügung.</small>
+			</div>
 		</ion-slide>
 		<ion-slide>
 			<h2>Badges</h2>
+			<div [hidden]="!stats3Available">
+				<small>Hier kommen die Badges.</small>
+			</div>
+			<div [hidden]="stats3Available">
+				<small>Leider stehen ungenügende Daten zu Verfügung.</small>
+			</div>
 		</ion-slide>
 	</ion-slides>
 </ion-content>

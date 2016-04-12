@@ -13,7 +13,6 @@ export class Page2 {
 		this.drinks = drinks.getDrinks();
 		this.storage = new Storage(SqlStorage, {name: 'baggr', backupFlag: SqlStorage.BACKUP_DOCUMENTS});
 		this.storage.get('balance').then((balance) => {
-			console.debug(balance);
 			this.balance = Number(balance == null?0:balance);
 		});		
 	}

@@ -10,18 +10,18 @@ export class Page3 {
 	}
 
 	constructor(drinksProvider) {
-		this.storage = new Storage(SqlStorage, {name: 'baggr', backupFlag: SqlStorage.BACKUP_DOCUMENTS});
-		this.drinks = drinksProvider.getDrinks();
-		this.topName = "";
-		this.topCount = 0;
+		let drinks = drinksProvider.getDrinks().slice();
 
-		for(let i=0; i<this.drinks.length; i++) {
-			this.storage.get(this.drinks[i].id).then((consumed) => {
-				if (consumed >= this.topCount) {
-					this.topCount = consumed;					
-					this.topName = this.drinks[i].title;
-				}
-			});
-		}
+		drinks.sort(function(a,b){
+			if (a.consumed > b.consumed) return -1;
+			if (a.consumed < b.consumed) return 1;
+			return 0;
+		});
+
+		this.drinks = drinks;
+		this.statsAvailable = drinks[0].consumed > 0;
+		this.stats2Available = false;
+		this.stats3Available = false;
+
 	}
 }
