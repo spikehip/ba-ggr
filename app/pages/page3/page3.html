@@ -43,9 +43,12 @@
 			<h2>Badges</h2>
 			<div [hidden]="!stats3Available">
 				<small>Hier kommen die Badges.</small>
+				<button block (click)="badgesOff()">Badges ausschalten</button>
 			</div>
 			<div [hidden]="stats3Available">
 				<small>Leider stehen ungenügende Daten zu Verfügung.</small>
+				<button block (click)="badgesOn()">Badges einschalten</button>
+				<small>Beim Teilnehmen werden Verbrauchsdaten anonym hochgeladen und ausgewertet.</small>
 			</div>
 		</ion-slide>
 	</ion-slides>

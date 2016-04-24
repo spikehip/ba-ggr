@@ -1,11 +1,12 @@
 import {App, Platform} from 'ionic-framework/ionic';
 import {TabsPage} from './pages/tabs/tabs';
 import {Drinks} from './providers/drinks';
+import {StatisticProvider} from './providers/statisticprovider';
 
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [Drinks],
+  providers: [Drinks, StatisticProvider],
   config: {
   } // http://ionicframework.com/docs/v2/api/config/Config/
 })
