@@ -62313,7 +62313,7 @@
 	            image: 'img/coke.jpg',
 	            title: 'Coke',
 	            description: 'Eine Flasche Cola',
-	            price: 1.20,
+	            price: 1.25,
 	            consumed: 4
 	        }, {
 	            id: 'redbull',
