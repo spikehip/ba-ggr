@@ -3190,18 +3190,18 @@
 
 	var _tabs = __webpack_require__(358);
 
+	var _drinks = __webpack_require__(360);
+
+	var _statisticprovider = __webpack_require__(363);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	// http://ionicframework.com/docs/v2/api/config/Config/
 	var MyApp = exports.MyApp = (_dec = (0, _ionic.App)({
 	  template: '<ion-nav [root]="rootPage"></ion-nav>',
+	  providers: [_drinks.Drinks, _statisticprovider.StatisticProvider],
 	  config: {} }), _dec(_class = function () {
-	  _createClass(MyApp, [{
-	    key: 'balance',
-	    value: function balance() {
-	      return 100;
-	    }
-	  }], [{
+	  _createClass(MyApp, null, [{
 	    key: 'parameters',
 	    get: function get() {
 	      return [[_ionic.Platform]];
@@ -62152,9 +62152,9 @@
 
 	var _page = __webpack_require__(359);
 
-	var _page2 = __webpack_require__(360);
+	var _page2 = __webpack_require__(361);
 
-	var _page3 = __webpack_require__(361);
+	var _page3 = __webpack_require__(362);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -62187,51 +62187,24 @@
 
 	var _ionic = __webpack_require__(5);
 
+	var _drinks = __webpack_require__(360);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Page1 = exports.Page1 = (_dec = (0, _ionic.Page)({
 		templateUrl: 'build/pages/page1/page1.html'
 	}), _dec(_class = function () {
-		function Page1() {
+		_createClass(Page1, null, [{
+			key: 'parameters',
+			get: function get() {
+				return [[_drinks.Drinks]];
+			}
+		}]);
+
+		function Page1(drinks) {
 			_classCallCheck(this, Page1);
 
-			this.drinks = [{
-				id: 'coffee',
-				image: 'img/coffee.jpg',
-				title: 'Kaffee',
-				description: 'Creme / Espresso',
-				price: 0.20,
-				consumed: 1
-			}, {
-				id: 'doublecoffee',
-				image: 'img/doublecoffee.jpg',
-				title: 'Creme / Espresso',
-				description: 'mit Milch',
-				price: 0.25,
-				consumed: 2
-			}, {
-				id: 'water',
-				image: 'img/water.jpg',
-				title: 'Wasser',
-				description: 'Eine Flasche Wasser',
-				price: 0.70,
-				consumed: 3
-			}, {
-				id: 'coke',
-				image: 'img/coke.jpg',
-				title: 'Coke',
-				description: 'Eine Flasche Cola',
-				price: 1.25,
-				consumed: 4
-			}, {
-				id: 'redbull',
-				image: 'img/redbull.jpg',
-				title: 'Red Bull',
-				description: 'Eine Flasche Red Bull',
-				price: 1.50,
-				consumed: 5
-			}];
-
+			this.drinks = drinks.getDrinks();
 			this.storage = new _ionic.Storage(_ionic.SqlStorage, { name: 'baggr', backupFlag: _ionic.SqlStorage.BACKUP_DOCUMENTS });
 			this.refresh();
 		}
@@ -62298,6 +62271,77 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Drinks = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _dec, _class;
+
+	var _core = __webpack_require__(7);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Drinks = exports.Drinks = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
+	    function Drinks() {
+	        _classCallCheck(this, Drinks);
+
+	        this.drinks = [{
+	            id: 'coffee',
+	            image: 'img/coffee.jpg',
+	            title: 'Kaffee',
+	            description: 'Creme / Espresso',
+	            price: 0.20,
+	            consumed: 1
+	        }, {
+	            id: 'doublecoffee',
+	            image: 'img/doublecoffee.jpg',
+	            title: 'Creme / Espresso',
+	            description: 'mit Milch',
+	            price: 0.25,
+	            consumed: 2
+	        }, {
+	            id: 'water',
+	            image: 'img/water.jpg',
+	            title: 'Wasser',
+	            description: 'Eine Flasche Wasser',
+	            price: 0.80,
+	            consumed: 3
+	        }, {
+	            id: 'coke',
+	            image: 'img/coke.jpg',
+	            title: 'Coke',
+	            description: 'Eine Flasche Cola',
+	            price: 1.20,
+	            consumed: 4
+	        }, {
+	            id: 'redbull',
+	            image: 'img/redbull.jpg',
+	            title: 'Red Bull',
+	            description: 'Eine Flasche Red Bull',
+	            price: 1.50,
+	            consumed: 5
+	        }];
+	    }
+
+	    _createClass(Drinks, [{
+	        key: 'getDrinks',
+	        value: function getDrinks() {
+	            return this.drinks;
+	        }
+	    }]);
+
+	    return Drinks;
+	}()) || _class);
+
+/***/ },
+/* 361 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 	exports.Page2 = undefined;
@@ -62308,19 +62352,28 @@
 
 	var _ionic = __webpack_require__(5);
 
+	var _drinks = __webpack_require__(360);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Page2 = exports.Page2 = (_dec = (0, _ionic.Page)({
 		templateUrl: 'build/pages/page2/page2.html'
 	}), _dec(_class = function () {
-		function Page2() {
+		_createClass(Page2, null, [{
+			key: 'parameters',
+			get: function get() {
+				return [[_drinks.Drinks]];
+			}
+		}]);
+
+		function Page2(drinks) {
 			var _this = this;
 
 			_classCallCheck(this, Page2);
 
+			this.drinks = drinks.getDrinks();
 			this.storage = new _ionic.Storage(_ionic.SqlStorage, { name: 'baggr', backupFlag: _ionic.SqlStorage.BACKUP_DOCUMENTS });
 			this.storage.get('balance').then(function (balance) {
-				console.debug(balance);
 				_this.balance = Number(balance == null ? 0 : balance);
 			});
 		}
@@ -62346,9 +62399,8 @@
 			value: function reset() {
 				this.balance = 0;
 				this.storage.set('balance', 0);
-				var drinks = ['coffee', 'doublecoffee', 'water', 'coke', 'redbull'];
-				for (var i = 0; i < drinks.length; i++) {
-					this.storage.set(drinks[i], 0);
+				for (var i = 0; i < this.drinks.length; i++) {
+					this.storage.set(this.drinks[i].id, 0);
 				}
 			}
 		}]);
@@ -62357,27 +62409,121 @@
 	}()) || _class);
 
 /***/ },
-/* 361 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	exports.Page3 = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _dec, _class;
 
 	var _ionic = __webpack_require__(5);
 
+	var _drinks = __webpack_require__(360);
+
+	var _statisticprovider = __webpack_require__(363);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Page3 = exports.Page3 = (_dec = (0, _ionic.Page)({
-	  templateUrl: 'build/pages/page3/page3.html'
-	}), _dec(_class = function Page3() {
-	  _classCallCheck(this, Page3);
-	}) || _class);
+		templateUrl: 'build/pages/page3/page3.html'
+	}), _dec(_class = function () {
+		_createClass(Page3, null, [{
+			key: 'parameters',
+			get: function get() {
+				return [[_drinks.Drinks], [_statisticprovider.StatisticProvider]];
+			}
+		}]);
+
+		function Page3(drinksProvider, statisticProvider) {
+			var _this = this;
+
+			_classCallCheck(this, Page3);
+
+			this.statisticProvider = statisticProvider;
+
+			var drinks = drinksProvider.getDrinks().slice();
+
+			drinks.sort(function (a, b) {
+				if (a.consumed > b.consumed) return -1;
+				if (a.consumed < b.consumed) return 1;
+				return 0;
+			});
+
+			this.drinks = drinks;
+			this.statsAvailable = drinks[0].consumed > 0;
+			this.stats2Available = false;
+			this.stats3Available = statisticProvider.getBadges().then(function (badges) {
+				_this.stats3Available = badges == null ? false : badges == "on" ? true : false;
+			});
+		}
+
+		_createClass(Page3, [{
+			key: 'badgesOn',
+			value: function badgesOn() {
+				this.statisticProvider.setBadges(true);
+				this.stats3Available = true;
+			}
+		}, {
+			key: 'badgesOff',
+			value: function badgesOff() {
+				this.statisticProvider.setBadges(false);
+				this.stats3Available = false;
+			}
+		}]);
+
+		return Page3;
+	}()) || _class);
+
+/***/ },
+/* 363 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.StatisticProvider = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _dec, _class;
+
+	var _core = __webpack_require__(7);
+
+	var _ionic = __webpack_require__(5);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var StatisticProvider = exports.StatisticProvider = (_dec = (0, _core.Injectable)(), _dec(_class = function () {
+	    function StatisticProvider() {
+	        _classCallCheck(this, StatisticProvider);
+
+	        console.log("Statistic Provider Initialized");
+	        this.storage = new _ionic.Storage(_ionic.SqlStorage, { name: 'baggr', backupFlag: _ionic.SqlStorage.BACKUP_DOCUMENTS });
+	    }
+
+	    _createClass(StatisticProvider, [{
+	        key: 'setBadges',
+	        value: function setBadges(state) {
+	            this.storage.set('badges', state ? "on" : "off");
+	        }
+	    }, {
+	        key: 'getBadges',
+	        value: function getBadges() {
+	            return this.storage.get('badges');
+	        }
+	    }]);
+
+	    return StatisticProvider;
+	}()) || _class);
 
 /***/ }
 /******/ ]);
