@@ -26,7 +26,7 @@ export class Drinks {
                 image: 'img/water.jpg',
                 title: 'Wasser',
                 description: 'Eine Flasche Wasser',
-                price: 0.70,        
+                price: 0.80,
                 consumed: 3
             },
             {
@@ -34,7 +34,7 @@ export class Drinks {
                 image: 'img/coke.jpg',
                 title: 'Coke',
                 description: 'Eine Flasche Cola',
-                price: 1.25,    
+                price: 1.20,
                 consumed: 4
             },
             {
@@ -42,7 +42,7 @@ export class Drinks {
                 image: 'img/redbull.jpg',
                 title: 'Red Bull',
                 description: 'Eine Flasche Red Bull',
-                price: 1.50,                
+                price: 1.50,
                 consumed: 5
             }
         ];
@@ -50,7 +50,7 @@ export class Drinks {
     }
  
     getDrinks() {
-        return this.drinks; 
+        return this.drinks;
     }
  
 }
