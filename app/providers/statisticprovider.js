@@ -1,12 +1,15 @@
 import {Injectable} from 'angular2/core';
-import {Storage, SqlStorage} from 'ionic-framework/ionic';
+import {DatabaseProvider} from './databaseprovider';
 
 @Injectable()
 export class StatisticProvider {
+	static get parameters() {
+		return [[DatabaseProvider]];
+	}
 
-    constructor(){
+    constructor(database){
     	console.log("Statistic Provider Initialized");
-    	this.storage = new Storage(SqlStorage, {name: 'baggr', backupFlag: SqlStorage.BACKUP_DOCUMENTS});
+    	this.storage = database;
  	}
 
  	setBadges(state) {

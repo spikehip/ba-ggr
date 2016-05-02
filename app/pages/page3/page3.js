@@ -1,4 +1,4 @@
-import {Page, Storage, SqlStorage} from 'ionic-framework/ionic';
+import {Page} from 'ionic-framework/ionic';
 import {Drinks} from '../../providers/drinks';
 import {StatisticProvider} from '../../providers/statisticprovider';
 

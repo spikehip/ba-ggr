@@ -1,17 +1,18 @@
-import {Page, Storage, SqlStorage} from 'ionic-framework/ionic';
+import {Page} from 'ionic-framework/ionic';
 import {Drinks} from '../../providers/drinks';
+import {DatabaseProvider} from '../../providers/databaseprovider';
 
 @Page({
   templateUrl: 'build/pages/page1/page1.html'
 })
 export class Page1 {
 	static get parameters() {
-		return [[Drinks]];
+		return [[Drinks],[DatabaseProvider]];
 	}
 
-	constructor(drinks) {
+	constructor(drinks, database) {
 		this.drinks = drinks.getDrinks();
-		this.storage = new Storage(SqlStorage, {name: 'baggr', backupFlag: SqlStorage.BACKUP_DOCUMENTS});
+		this.storage = database;
 		this.refresh();
 	};
 
