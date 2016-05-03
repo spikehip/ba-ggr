@@ -34,9 +34,11 @@
 			<h2>Übersicht Woche</h2>
 			<div [hidden]="!stats2Available">
 				<small>Hier kommen die Statistiken.</small>
+				<button block (click)="weeklyOff()">Statistik ausschalten</button>
 			</div>
 			<div [hidden]="stats2Available">
-				<small>Leider stehen ungenügende Daten zu Verfügung.</small>
+				<small>Es werden Statistiken über dein Verbrauchsverhältniss gesammelt und durch Google Charts dargestellt.</small>
+				<button block (click)="weeklyOn()">Statistik einschalten</button>
 			</div>
 		</ion-slide>
 		<ion-slide>

@@ -13,10 +13,18 @@ export class StatisticProvider {
  	}
 
  	setBadges(state) {
- 		this.storage.set('badges', state?"on":"off");	
+ 		this.storage.set('badges', state?"on":"off");
  	}
 
  	getBadges() {
  		return this.storage.get('badges');
+ 	}
+
+ 	getWeeklyStatStatus() {
+ 		return this.storage.get('weekly');
+ 	}
+
+ 	setWeeklyStatStatus(state) {
+ 	this.storage.set('weekly', state?"on":"off");	
  	}
 }
