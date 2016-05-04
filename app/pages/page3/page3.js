@@ -1,9 +1,11 @@
 import {Page} from 'ionic-framework/ionic';
 import {Drinks} from '../../providers/drinks';
 import {StatisticProvider} from '../../providers/statisticprovider';
+import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 
 @Page({
-  templateUrl: 'build/pages/page3/page3.html'
+  templateUrl: 'build/pages/page3/page3.html',
+  directives: [CHART_DIRECTIVES]
 })
 export class Page3 {
 	static get parameters() {
@@ -26,6 +28,14 @@ export class Page3 {
 		this.statsAvailable = drinks[0].consumed > 0;
 		statisticProvider.getWeeklyStatStatus().then((weekly) => {
 			this.stats2Available = weekly == null?false:(weekly=="on"?true:false);
+			this.chartData = [
+				[drinks[0].consumed, drinks[1].consumed, drinks[2].consumed],
+				[drinks[2].consumed, drinks[1].consumed, drinks[0].consumed]
+			];
+			this.chartLabels = [drinks[0].name, drinks[1].name, drinks[3].name];
+			this.chartSeries = [drinks[0].name, drinks[1].name, drinks[3].name];
+			this.chartLegend = false;
+			this.chartType = "Doughnout";
 		});
 		statisticProvider.getBadges().then((badges) => {
 			this.stats3Available = badges == null?false:(badges=="on"?true:false);
