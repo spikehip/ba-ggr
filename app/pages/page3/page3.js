@@ -1,11 +1,9 @@
 import {Page} from 'ionic-angular';
 import {Drinks} from '../../providers/drinks';
 import {StatisticProvider} from '../../providers/statisticprovider';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 
 @Page({
-  templateUrl: 'build/pages/page3/page3.html',
-  directives: [CHART_DIRECTIVES]
+  templateUrl: 'build/pages/page3/page3.html'
 })
 export class Page3 {
 	static get parameters() {
@@ -25,21 +23,49 @@ export class Page3 {
 		});
 
 		this.drinks = drinks;
+		
+		let drinkLabels = [];
+		let drinkConsumed = [];
+		drinks.forEach(function(drink){
+			console.debug(drink);
+			drinkLabels.push(drink.title);
+			drinkConsumed.push(drink.consumed);
+		});
+
 		this.statsAvailable = drinks[0].consumed > 0;
 		statisticProvider.getWeeklyStatStatus().then((weekly) => {
 			this.stats2Available = weekly == null?false:(weekly=="on"?true:false);
-			this.chartData = [
-				[drinks[0].consumed, drinks[1].consumed, drinks[2].consumed],
-				[drinks[2].consumed, drinks[1].consumed, drinks[0].consumed]
-			];
-			this.chartLabels = [drinks[0].name, drinks[1].name, drinks[3].name];
-			this.chartSeries = [drinks[0].name, drinks[1].name, drinks[3].name];
-			this.chartLegend = false;
-			this.chartType = "Doughnout";
+			if ( this.stats2Available ) {
+				Chart.defaults.global.responsive = false;
+				let ctx = document.getElementById("myChart");
+				let myChart = new Chart(ctx, {
+				    type: 'line',
+				    data: {
+				        labels: drinkLabels,
+				        datasets: [{
+				            label: '# of Votes',
+				            data: drinkConsumed
+				        },
+				        {
+				        	label: '# other',
+				        	data: [10, 1,5,3,4]
+				        }]
+				    },
+				    options: {
+				        scales: {
+				            display: false
+				        }
+				    }
+				});
+				//myChart.render(1000, false);
+				//let img=myChart.toBase64Image();
+				//console.debug(img);
+			}
 		});
 		statisticProvider.getBadges().then((badges) => {
 			this.stats3Available = badges == null?false:(badges=="on"?true:false);
 		});
+
 	}
 
 	badgesOn() {
