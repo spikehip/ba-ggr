@@ -1,4 +1,4 @@
-import {Page} from 'ionic-framework/ionic';
+import {Page} from 'ionic-angular';
 import {Drinks} from '../../providers/drinks';
 import {StatisticProvider} from '../../providers/statisticprovider';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';

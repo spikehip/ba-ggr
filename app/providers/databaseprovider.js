@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Storage, SqlStorage} from 'ionic-framework/ionic';
+import {Storage, SqlStorage} from 'ionic-angular';
 
 @Injectable()
 export class DatabaseProvider {

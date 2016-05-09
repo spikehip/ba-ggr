@@ -1,4 +1,4 @@
-import {Page} from 'ionic-framework/ionic';
+import {Page} from 'ionic-angular';
 import {Drinks} from '../../providers/drinks';
 import {DatabaseProvider} from '../../providers/databaseprovider';
 

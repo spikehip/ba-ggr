@@ -1,4 +1,5 @@
-import {App, Platform} from 'ionic-framework/ionic';
+import {App, Platform} from 'ionic-angular';
+import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {Drinks} from './providers/drinks';
 import {StatisticProvider} from './providers/statisticprovider';
@@ -34,6 +35,7 @@ export class MyApp {
       // For example, we might change the StatusBar color. This one below is
       // good for dark backgrounds and light text:
       // StatusBar.setStyle(StatusBar.LIGHT_CONTENT)
+      StatusBar.styleDefault();
     });
   }
 }

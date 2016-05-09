@@ -8,7 +8,7 @@
 <ion-content class="page3">
 	<ion-slides pager>
 		<ion-slide>
-			<h2>Top 3 der Woche</h2>
+			<h2>Top 3 aktuell</h2>
 			<div [hidden]="!statsAvailable">
 				<ion-item>
 				  <ion-icon name="podium" item-left></ion-icon>  				
@@ -34,9 +34,18 @@
 			<h2>Übersicht Woche</h2>
 			<div [hidden]="!stats2Available">
 				<small>Hier kommen die Statistiken.</small>
+				<base-chart class="chart" 
+					[data]="chartData"
+					[labels]="chartLabels"
+                	[series]="chartSeries"
+                	[legend]="chartLegend"
+                	[chartType]="chartType"
+				></base-chart>
+				<button block (click)="weeklyOff()">Statistik ausschalten</button>
 			</div>
 			<div [hidden]="stats2Available">
-				<small>Leider stehen ungenügende Daten zu Verfügung.</small>
+				<small>Es werden Statistiken über dein Verbrauchsverhältniss gesammelt und durch Google Charts dargestellt.</small>
+				<button block (click)="weeklyOn()">Statistik einschalten</button>
 			</div>
 		</ion-slide>
 		<ion-slide>
