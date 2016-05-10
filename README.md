@@ -8,6 +8,8 @@ to track and sum up the consumption of different beverages in the kitchen.
 ### Downloading the project sources 
 
  * (fork and) clone this project
+  * install docker, type sh ./docker-run-app.sh or ./docker-build-android.sh respectively
+  or 
   * install ionicframework 
    * install android sdk or xcode 
     * type ionic build [android | ios]
