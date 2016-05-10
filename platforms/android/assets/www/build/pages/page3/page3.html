@@ -33,18 +33,15 @@
 		<ion-slide>
 			<h2>Übersicht Woche</h2>
 			<div [hidden]="!stats2Available">
-				<small>Hier kommen die Statistiken.</small>
-				<base-chart class="chart" 
-					[data]="chartData"
-					[labels]="chartLabels"
-                	[series]="chartSeries"
-                	[legend]="chartLegend"
-                	[chartType]="chartType"
-				></base-chart>
+				<ion-row>
+					<ion-col width-100>
+						<canvas id="myChart" style="width: 100%; height: 100%;"></canvas>
+					</ion-col>
+				</ion-row>
 				<button block (click)="weeklyOff()">Statistik ausschalten</button>
 			</div>
 			<div [hidden]="stats2Available">
-				<small>Es werden Statistiken über dein Verbrauchsverhältniss gesammelt und durch Google Charts dargestellt.</small>
+				<small>Es werden Statistiken über dein Verbrauchsverhältniss lokal auf deinem Handy gesammelt und durch Charts dargestellt.</small>
 				<button block (click)="weeklyOn()">Statistik einschalten</button>
 			</div>
 		</ion-slide>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+</head>
+<body>
+
+  <!-- this Ionic's root component and where the app will load -->
+  <div style="height: 300px; width=300px;">
+  	<canvas id="myChart"></canvas>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="build/js/Chart.bundle.min.js"></script>
+
+  <script type="text/javascript">
+				Chart.defaults.global.responsive = false;
+				var ctx = document.getElementById("myChart");
+				var myChart = new Chart(ctx, {
+				    type: 'line',
+				    data: {
+				        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+				        datasets: [{
+				            label: '# of Votes',
+				            data: [12, 19, 3, 5, 2, 3]
+				        }]
+				    },
+				    options: {
+				        scales: {
+				        	display: false
+				        }
+				    }
+				});
+				myChart.render(1000, false);
+				var img=myChart.toBase64Image();
+				//console.debug(img);
+  </script>  
+</body>
+</html>
