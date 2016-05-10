@@ -24,12 +24,15 @@ export class Page3 {
 
 		this.drinks = drinks;
 		
-		let drinkLabels = [];
-		let drinkConsumed = [];
-		drinks.forEach(function(drink){
-			console.debug(drink);
-			drinkLabels.push(drink.title);
-			drinkConsumed.push(drink.consumed);
+		let weeklyDatasets = [];
+		drinks.forEach(function(drink, index){
+			if (drink.consumed > 0) {
+				let dataset = {};
+				dataset.label = drink.title;
+				dataset.data = [1, 2, 1, 4, 1];
+				dataset.data[index] = drink.consumed;
+				weeklyDatasets.push(dataset);
+			}
 		});
 
 		this.statsAvailable = drinks[0].consumed > 0;
@@ -37,19 +40,15 @@ export class Page3 {
 			this.stats2Available = weekly == null?false:(weekly=="on"?true:false);
 			if ( this.stats2Available ) {
 				Chart.defaults.global.responsive = false;
+				Chart.defaults.global.legend.display = true;
+				Chart.defaults.global.tooltips.enabled = false;
+
 				let ctx = document.getElementById("myChart");
 				let myChart = new Chart(ctx, {
 				    type: 'line',
 				    data: {
-				        labels: drinkLabels,
-				        datasets: [{
-				            label: '# of Votes',
-				            data: drinkConsumed
-				        },
-				        {
-				        	label: '# other',
-				        	data: [10, 1,5,3,4]
-				        }]
+				        labels: ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"],
+				        datasets: weeklyDatasets
 				    },
 				    options: {
 				        scales: {
@@ -57,9 +56,6 @@ export class Page3 {
 				        }
 				    }
 				});
-				//myChart.render(1000, false);
-				//let img=myChart.toBase64Image();
-				//console.debug(img);
 			}
 		});
 		statisticProvider.getBadges().then((badges) => {
