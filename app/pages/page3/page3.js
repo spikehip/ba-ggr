@@ -24,8 +24,22 @@ export class Page3 {
 
 		this.drinks = drinks;
 		
+		this.statsAvailable = drinks[0].consumed > 0;
+		statisticProvider.getWeeklyStatStatus().then((weekly) => {
+			this.stats2Available = weekly == null?false:(weekly=="on"?true:false);
+			if ( this.stats2Available ) {
+				this.drawWeeklyStat();
+			}
+		});
+		statisticProvider.getBadges().then((badges) => {
+			this.stats3Available = badges == null?false:(badges=="on"?true:false);
+		});
+
+	}
+
+	drawWeeklyStat() {
 		let weeklyDatasets = [];
-		drinks.forEach(function(drink, index){
+		this.drinks.forEach(function(drink, index){
 			if (drink.consumed > 0) {
 				let dataset = {};
 				dataset.label = drink.title;
@@ -35,33 +49,28 @@ export class Page3 {
 			}
 		});
 
-		this.statsAvailable = drinks[0].consumed > 0;
-		statisticProvider.getWeeklyStatStatus().then((weekly) => {
-			this.stats2Available = weekly == null?false:(weekly=="on"?true:false);
-			if ( this.stats2Available ) {
-				Chart.defaults.global.responsive = false;
-				Chart.defaults.global.legend.display = true;
-				Chart.defaults.global.tooltips.enabled = false;
+		Chart.defaults.global.responsive = false;
+		Chart.defaults.global.legend.display = true;
+		Chart.defaults.global.tooltips.enabled = false;
 
-				let ctx = document.getElementById("myChart");
-				let myChart = new Chart(ctx, {
-				    type: 'line',
-				    data: {
-				        labels: ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"],
-				        datasets: weeklyDatasets
-				    },
-				    options: {
-				        scales: {
-				            display: false
-				        }
-				    }
-				});
-			}
-		});
-		statisticProvider.getBadges().then((badges) => {
-			this.stats3Available = badges == null?false:(badges=="on"?true:false);
-		});
-
+		let ctx = document.getElementById("myChart");
+		if (typeof this.myChart == 'undefined') {
+			this.myChart = new Chart(ctx, {
+			    type: 'line',
+			    data: {
+			        labels: ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"],
+			        datasets: weeklyDatasets
+			    },
+			    options: {
+			        scales: {
+			            display: false
+			        }
+			    }
+			});
+		}
+		else {
+			this.myChart.update(1000,true);
+		}
 	}
 
 	badgesOn() {
@@ -77,6 +86,7 @@ export class Page3 {
 	weeklyOn() {
 		this.statisticProvider.setWeeklyStatStatus(true);
 		this.stats2Available = true;
+		this.drawWeeklyStat();
 	}
 
 	weeklyOff() {
