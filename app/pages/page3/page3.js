@@ -12,8 +12,6 @@ export class Page3 {
 
 	constructor(drinksProvider, statisticProvider) {
 		this.statisticProvider = statisticProvider;
-
-
 		let drinks = drinksProvider.getDrinks().slice();
 
 		drinks.sort(function(a,b){
@@ -23,7 +21,7 @@ export class Page3 {
 		});
 
 		this.drinks = drinks;
-		
+
 		this.statsAvailable = drinks[0].consumed > 0;
 		statisticProvider.getWeeklyStatStatus().then((weekly) => {
 			this.stats2Available = weekly == null?false:(weekly=="on"?true:false);
@@ -38,39 +36,65 @@ export class Page3 {
 	}
 
 	drawWeeklyStat() {
-		let weeklyDatasets = [];
-		this.drinks.forEach(function(drink, index){
-			if (drink.consumed > 0) {
-				let dataset = {};
-				dataset.label = drink.title;
-				dataset.data = [1, 2, 1, 4, 1];
-				dataset.data[index] = drink.consumed;
-				weeklyDatasets.push(dataset);
-			}
-		});
+		let sp = this.statisticProvider;
+		sp.getDrinkStatistics().then((result) => {
+      let weeklyDatasets = {};
+      for(var i=0;i<result.res.rows.length;i++) {
+        //console.debug(result.res.rows.item(i));
+        let id=result.res.rows.item(i).id;
+        let dataset = typeof weeklyDatasets[id] == 'undefined'?{}:weeklyDatasets[id];
+        if (typeof dataset.label == 'undefined') {
+          dataset.label = id;
+          dataset.data = [0, 0, 0, 0, 0];
+        }
+        let consumed = result.res.rows.item(i).consumed;
+        let date = new Date(result.res.rows.item(i).date);
+        let position = date.getDay()==0?6:date.getDay()-1;
+        if ( position >= 0 && position <= 4 ) {
+          dataset.data[position] = consumed;
+          weeklyDatasets[id] = dataset;
+        }
+      }
+      return weeklyDatasets;
+    }).then((weeklyDatasets) => {
+      let dataset = [];
+      this.drinks.forEach(function(drink, index) {
+        let ds = {};
+        if ( typeof weeklyDatasets[drink.id] != 'undefined' ) {
+          ds.data = weeklyDatasets[drink.id].data;
+          ds.label = drink.title;
+          dataset.push(ds);
+        }
+      });
+      if ( dataset.length == 0) {
+        this.notEnoughChartData = true;
+      }
+      else {
+        this.notEnoughChartData = false;
+        Chart.defaults.global.responsive = false;
+    		Chart.defaults.global.legend.display = true;
+    		Chart.defaults.global.tooltips.enabled = false;
 
-		Chart.defaults.global.responsive = false;
-		Chart.defaults.global.legend.display = true;
-		Chart.defaults.global.tooltips.enabled = false;
-
-		let ctx = document.getElementById("myChart");
-		if (typeof this.myChart == 'undefined') {
-			this.myChart = new Chart(ctx, {
-			    type: 'line',
-			    data: {
-			        labels: ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"],
-			        datasets: weeklyDatasets
-			    },
-			    options: {
-			        scales: {
-			            display: false
-			        }
-			    }
-			});
-		}
-		else {
-			this.myChart.update(1000,true);
-		}
+    		let ctx = document.getElementById("myChart");
+    		if (typeof this.myChart == 'undefined') {
+    			this.myChart = new Chart(ctx, {
+    			    type: 'line',
+    			    data: {
+    			        labels: ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"],
+    			        datasets: dataset
+    			    },
+    			    options: {
+    			        scales: {
+    			            display: false
+    			        }
+    			    }
+    			});
+    		}
+    		else {
+    			this.myChart.update(1000,true);
+    		}
+      }
+    });
 	}
 
 	badgesOn() {

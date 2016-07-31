@@ -25,6 +25,20 @@ export class StatisticProvider {
  	}
 
  	setWeeklyStatStatus(state) {
- 	this.storage.set('weekly', state?"on":"off");	
+ 	this.storage.set('weekly', state?"on":"off");
+ 	}
+
+ 	collectStatForDrink(drink_id) {
+ 		this.getWeeklyStatStatus().then((status) => {
+ 			if ( (status == null?false:(status=="on"?true:false)) ) {
+ 				let now = new Date();
+ 				let today = now.getFullYear() + "-"+(now.getMonth()+1)+"-"+now.getDate();
+ 				this.storage.insertStatistic(drink_id, today);
+ 			}
+ 		});
+ 	}
+
+ 	getDrinkStatistics() {
+ 		return this.storage.getDrinkStatistics();
  	}
 }
