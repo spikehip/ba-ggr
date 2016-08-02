@@ -1,0 +1,44 @@
+
+<ion-toolbar position="top">
+  <ion-title>{{modalTitle}}</ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label fixed>Getränk-Titel</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Getränk-Beschreibung</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Preis</ion-label>
+      <ion-input type="number" [(ngModel)]="price"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Bild</ion-label>
+        <ion-select [(ngModel)]="image">
+          <ion-option value="img/coffee.jpg">Tasse</ion-option>
+          <ion-option value="img/doublecoffee.jpg">Zwei Tassen</ion-option>
+          <ion-option value="img/water.jpg">Flasche</ion-option>
+          <ion-option value="img/coke.jpg">Colaflasche</ion-option>
+          <ion-option value="img/redbull.jpg">Redbull-Dose</ion-option>
+        </ion-select>
+      </ion-item>
+
+  </ion-list>
+
+  <ion-grid>
+    <ion-row center>
+      <ion-col width-50><button round secondary (click)="save()">Save</button></ion-col>
+      <ion-col width-50><button round danger (click)="dismiss()">Dismiss</button></ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

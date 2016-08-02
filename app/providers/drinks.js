@@ -1,9 +1,9 @@
 import {Injectable} from 'angular2/core';
- 
+
 @Injectable()
 export class Drinks {
     constructor(){
- 
+
         this.drinks = [
             {
                 id: 'coffee',
@@ -46,11 +46,40 @@ export class Drinks {
                 consumed: 5
             }
         ];
- 
+
     }
- 
+
     getDrinks() {
         return this.drinks;
     }
- 
+
+    addDrink(title, description, price, image) {
+      //TODO: generate ID
+      let id="drink_"+this.drinks.count+1;
+      this.drinks.push({id: id, image: image, title: title, description: description, price: price, consumed: 0});
+    }
+
+    saveDrink(id, title, description, price, image) {
+      //TODO: generate ID
+      let i=-1;
+      this.drinks.forEach(function (drink, index) {
+        if (drink.id == id) {
+          i = index;
+        }
+      });
+      if ( i > -1 ) {
+          this.drinks[i].title = title;
+          this.drinks[i].description = description;
+          this.drinks[i].price = price;
+          this.drinks[i].image = image;
+      }
+    }
+
+    removeDrink(drink) {
+      let index=this.drinks.indexOf(drink);
+      if (index > -1) {
+        this.drinks.splice(index, 1);
+      }
+    }
+
 }
