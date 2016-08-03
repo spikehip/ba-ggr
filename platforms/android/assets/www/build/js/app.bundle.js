@@ -268,17 +268,9 @@ var Page3 = exports.Page3 = (_dec = (0, _ionicAngular.Page)({
     _classCallCheck(this, Page3);
 
     this.statisticProvider = statisticProvider;
-    var drinks = drinksProvider.getDrinks().slice();
-
-    drinks.sort(function (a, b) {
-      if (a.consumed > b.consumed) return -1;
-      if (a.consumed < b.consumed) return 1;
-      return 0;
-    });
-
-    this.drinks = drinks;
-
-    this.statsAvailable = drinks[0].consumed > 0;
+    this.drinksProvider = drinksProvider;
+    this.updateAlltimetop();
+    this.statsAvailable = this.drinks[0].consumed > 0;
     statisticProvider.getWeeklyStatStatus().then(function (weekly) {
       _this.stats2Available = weekly == null ? false : weekly == "on" ? true : false;
       if (_this.stats2Available) {
@@ -291,6 +283,19 @@ var Page3 = exports.Page3 = (_dec = (0, _ionicAngular.Page)({
   }
 
   _createClass(Page3, [{
+    key: 'updateAlltimetop',
+    value: function updateAlltimetop() {
+      var drinks = this.drinksProvider.getDrinks().slice();
+
+      drinks.sort(function (a, b) {
+        if (a.consumed > b.consumed) return -1;
+        if (a.consumed < b.consumed) return 1;
+        return 0;
+      });
+
+      this.drinks = drinks;
+    }
+  }, {
     key: 'drawWeeklyStat',
     value: function drawWeeklyStat() {
       var _this2 = this;
@@ -317,11 +322,14 @@ var Page3 = exports.Page3 = (_dec = (0, _ionicAngular.Page)({
         return weeklyDatasets;
       }).then(function (weeklyDatasets) {
         var dataset = [];
+        var colors = ['red', 'green', 'blue', 'purple', 'gray', 'brown', 'yellow', 'orange', '#efefef'];
         _this2.drinks.forEach(function (drink, index) {
           var ds = {};
           if (typeof weeklyDatasets[drink.id] != 'undefined') {
             ds.data = weeklyDatasets[drink.id].data;
             ds.label = drink.title;
+            ds.borderColor = colors[index] !== undefined ? colors[index] : 'black';
+            //ds.backgroundColor = colors[index];
             dataset.push(ds);
           }
         });
@@ -377,6 +385,24 @@ var Page3 = exports.Page3 = (_dec = (0, _ionicAngular.Page)({
     value: function weeklyOff() {
       this.statisticProvider.setWeeklyStatStatus(false);
       this.stats2Available = false;
+    }
+  }, {
+    key: 'refresh',
+    value: function refresh() {
+      this.updateAlltimetop();
+      if (typeof this.myChart != 'undefined') {
+        this.myChart = undefined;
+        var chartElement = document.getElementById("myChart");
+        if (chartElement !== undefined) {
+          var parentElement = chartElement.parentNode;
+          var canvas = document.createElement("canvas");
+          canvas.setAttribute("id", "myChart");
+          chartElement.remove();
+          parentElement.appendChild(canvas);
+        }
+
+        this.drawWeeklyStat();
+      }
     }
   }]);
 
@@ -459,7 +485,7 @@ var Page4 = exports.Page4 = (_dec = (0, _ionicAngular.Page)({
         if (data.success == true) {
           var desc = _this2.getDescripton(data);
           var toast = _ionicAngular.Toast.create({
-            message: desc + ' hinzugefügt',
+            message: desc + ' wurde bearbeitet.',
             duration: 3000
           });
           _this2.nav.present(toast);
@@ -705,7 +731,7 @@ var Drinks = exports.Drinks = (_dec = (0, _core.Injectable)(), _dec(_class = fun
         value: function addDrink(title, description, price, image) {
             //TODO: generate ID
             var id = "drink_" + this.drinks.count + 1;
-            this.drinks.push({ id: id, image: image, title: title, description: description, price: price, consumed: 0 });
+            this.drinks.push({ id: id, image: image, title: title, description: description, price: Number(price), consumed: 0 });
         }
     }, {
         key: 'saveDrink',
@@ -720,7 +746,7 @@ var Drinks = exports.Drinks = (_dec = (0, _core.Injectable)(), _dec(_class = fun
             if (i > -1) {
                 this.drinks[i].title = title;
                 this.drinks[i].description = description;
-                this.drinks[i].price = price;
+                this.drinks[i].price = Number(price);
                 this.drinks[i].image = image;
             }
         }
