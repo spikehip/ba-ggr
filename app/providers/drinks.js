@@ -56,7 +56,7 @@ export class Drinks {
     addDrink(title, description, price, image) {
       //TODO: generate ID
       let id="drink_"+this.drinks.count+1;
-      this.drinks.push({id: id, image: image, title: title, description: description, price: price, consumed: 0});
+      this.drinks.push({id: id, image: image, title: title, description: description, price: Number(price), consumed: 0});
     }
 
     saveDrink(id, title, description, price, image) {
@@ -70,7 +70,7 @@ export class Drinks {
       if ( i > -1 ) {
           this.drinks[i].title = title;
           this.drinks[i].description = description;
-          this.drinks[i].price = price;
+          this.drinks[i].price = Number(price);
           this.drinks[i].image = image;
       }
     }
