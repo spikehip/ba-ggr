@@ -12,17 +12,9 @@ export class Page3 {
 
 	constructor(drinksProvider, statisticProvider) {
 		this.statisticProvider = statisticProvider;
-		let drinks = drinksProvider.getDrinks().slice();
-
-		drinks.sort(function(a,b){
-			if (a.consumed > b.consumed) return -1;
-			if (a.consumed < b.consumed) return 1;
-			return 0;
-		});
-
-		this.drinks = drinks;
-
-		this.statsAvailable = drinks[0].consumed > 0;
+    this.drinksProvider = drinksProvider;
+    this.updateAlltimetop();
+		this.statsAvailable = this.drinks[0].consumed > 0;
 		statisticProvider.getWeeklyStatStatus().then((weekly) => {
 			this.stats2Available = weekly == null?false:(weekly=="on"?true:false);
 			if ( this.stats2Available ) {
@@ -34,6 +26,18 @@ export class Page3 {
 		});
 
 	}
+
+  updateAlltimetop() {
+    let drinks = this.drinksProvider.getDrinks().slice();
+
+		drinks.sort(function(a,b){
+			if (a.consumed > b.consumed) return -1;
+			if (a.consumed < b.consumed) return 1;
+			return 0;
+		});
+
+		this.drinks = drinks;
+  }
 
 	drawWeeklyStat() {
 		let sp = this.statisticProvider;
@@ -58,11 +62,14 @@ export class Page3 {
       return weeklyDatasets;
     }).then((weeklyDatasets) => {
       let dataset = [];
+      let colors = ['red', 'green', 'blue', 'purple', 'gray', 'brown', 'yellow', 'orange', '#efefef'];
       this.drinks.forEach(function(drink, index) {
         let ds = {};
         if ( typeof weeklyDatasets[drink.id] != 'undefined' ) {
           ds.data = weeklyDatasets[drink.id].data;
           ds.label = drink.title;
+          ds.borderColor = colors[index]!==undefined?colors[index]:'black';
+          //ds.backgroundColor = colors[index];
           dataset.push(ds);
         }
       });
@@ -117,5 +124,22 @@ export class Page3 {
 		this.statisticProvider.setWeeklyStatStatus(false);
 		this.stats2Available = false;
 	}
+
+  refresh() {
+    this.updateAlltimetop();
+    if (typeof this.myChart != 'undefined') {
+      this.myChart = undefined;
+      let chartElement = document.getElementById("myChart");
+      if (chartElement !== undefined ) {
+        let parentElement = chartElement.parentNode;
+        let canvas = document.createElement("canvas");
+        canvas.setAttribute("id", "myChart");
+        chartElement.remove();
+        parentElement.appendChild(canvas);
+      }
+
+      this.drawWeeklyStat();
+    }
+  }
 
 }
