@@ -12,6 +12,7 @@ export class Page1 {
 	}
 
 	constructor(drinks, database, statistic) {
+    this.drinksProvider = drinks;
 		this.drinks = drinks.getDrinks();
 		this.storage = database;
 		this.statistic = statistic;
@@ -22,36 +23,46 @@ export class Page1 {
 		this.storage.get('balance').then((balance) => {
 			this.balance = balance == null?0:balance;
 		});
-		for(let i=0; i<this.drinks.length; i++) {
-			let id = this.drinks[i].id;
-			this.storage.get(this.drinks[i].id).then((consumed) => {
-				this.drinks[i].consumed = Number(consumed);
-			});
-		}
 	}
 
 	remove(drink) {
-		this.storage.get(drink.id).then((consumed) => {
-			if(consumed == null) consumed=0;
-			if (consumed > 0) {
-				this.storage.set(drink.id, Number(consumed) - 1);				
-				this.storage.get('balance').then((balance) => {
-					this.storage.set('balance', Number(balance) + drink.price);	
-					this.refresh();
-				});			
-			}
-		});
+    let consumed = 0;
+    let index=this.drinksProvider.getDrinkIndex(drink.id);
+    if( index> -1 ) {
+      consumed = Number(this.drinks[index].consumed) - 1;
+      if (consumed > 0 ) {
+        this.drinksProvider.consume(index, consumed);
+        this.storage.updateDrinkConsumption(drink.id, consumed ).then((result) => {
+            this.statistic.collectStatForDrink(drink.id);
+            return drink;
+        }).then((result) => {
+          this.storage.get('balance').then((balance) => {
+            this.storage.set('balance', Number(balance) + Number(result.price)).then((result) => {
+              this.refresh();
+            });
+          });
+        });
+      }
+    }
 	}
 
 	add(drink) {
-		this.storage.get(drink.id).then((consumed) => {
-			if(consumed == null) consumed=0;
-			this.storage.set(drink.id, Number(consumed) + 1);
-			this.statistic.collectStatForDrink(drink.id);
-		});
-		this.storage.get('balance').then((balance) => {
-			this.storage.set('balance', balance - drink.price);	
-			this.refresh();
-		});
+    let consumed = 0;
+    let index=this.drinksProvider.getDrinkIndex(drink.id);
+    if (index > -1) {
+      consumed = Number(this.drinks[index].consumed) +1;
+      //this.drinks[index].consumed = consumed;
+      this.drinksProvider.consume(index, consumed);
+      this.storage.updateDrinkConsumption(drink.id, consumed ).then((result) => {
+          this.statistic.collectStatForDrink(drink.id);
+          return drink;
+      }).then((result) => {
+        this.storage.get('balance').then((balance) => {
+          this.storage.set('balance', balance - result.price).then((result) => {
+            this.refresh();
+          });
+        });
+      });
+    }
 	}
  }

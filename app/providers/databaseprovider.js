@@ -9,11 +9,12 @@ export class DatabaseProvider {
     	//create statistics table
     	//CREATE TABLE IF NOT EXISTS statistics (id, date)
     	this.storage.query('CREATE TABLE IF NOT EXISTS statistics (id,date)');
+      this.storage.query('CREATE TABLE IF NOT EXISTS drinks (id,image,title,description,price,consumed)');
     	console.log("Database Provider Initialized");
  	}
 
  	set(key, value) {
- 		this.storage.set(key, value);
+ 		return this.storage.set(key, value);
  	}
 
  	get(key) {
@@ -38,4 +39,23 @@ export class DatabaseProvider {
   		let SQL = 'SELECT id, count(id) as consumed,date FROM statistics WHERE date(date) >= date("'+mondaySQL+'") GROUP BY id,date';
  		return this.storage.query(SQL);
  	}
+
+  getDrinks() {
+    return this.storage.query('SELECT * FROM drinks');
+  }
+
+  updateDrink(drink) {
+    return this.storage.query('UPDATE drinks SET image="'+drink.image+'",title="'+drink.title+'", description="'+drink.description+'", price='+drink.price+' WHERE id="'+drink.id+'"');
+  }
+
+  updateDrinkConsumption(id, consumption) {
+    return this.storage.query('UPDATE drinks SET consumed='+consumption+' WHERE id="'+id+'"');
+  }
+
+  addDrink(drink) {
+    return this.storage.query('INSERT INTO drinks VALUES ("'+drink.id+'", "'+drink.image+'", "'+drink.title+'", "'+drink.description+'", "'+drink.price+'", 0)');
+  }
+  removeDrink(drink) {
+    return this.storage.query('DELETE FROM drinks WHERE id="'+drink.id+'"');
+  }
 }
