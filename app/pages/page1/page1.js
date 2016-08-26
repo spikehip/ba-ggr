@@ -30,10 +30,9 @@ export class Page1 {
     let index=this.drinksProvider.getDrinkIndex(drink.id);
     if( index> -1 ) {
       consumed = Number(this.drinks[index].consumed) - 1;
-      if (consumed > 0 ) {
+      if (consumed > -1 ) {
         this.drinksProvider.consume(index, consumed);
         this.storage.updateDrinkConsumption(drink.id, consumed ).then((result) => {
-            this.statistic.collectStatForDrink(drink.id);
             return drink;
         }).then((result) => {
           this.storage.get('balance').then((balance) => {

@@ -81,7 +81,8 @@ export class Drinks {
 
     addDrink(title, description, price, image) {
       //TODO: generate ID
-      let id="drink_"+this.drinks.count+1;
+      console.debug(this.drinks);
+      let id="drink_"+this.drinks.length + 1;
       let drink={id: id, image: image, title: title, description: description, price: Number(price), consumed: 0};
       this.drinks.push(drink);
       this.storage.addDrink(drink);

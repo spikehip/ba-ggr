@@ -53,6 +53,7 @@ export class DatabaseProvider {
   }
 
   addDrink(drink) {
+    console.log("Ading drink", drink);
     return this.storage.query('INSERT INTO drinks VALUES ("'+drink.id+'", "'+drink.image+'", "'+drink.title+'", "'+drink.description+'", "'+drink.price+'", 0)');
   }
   removeDrink(drink) {
