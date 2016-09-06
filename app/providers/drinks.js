@@ -10,69 +10,73 @@ export class Drinks {
     constructor(database) {
         this.storage = database;
         this.drinks = [];
-        this.storage.getDrinks().then((result) => {
-          if (result.res.rows.length == 0) {
-            console.log("Found no drinks in database, inserting default set of beverages.");
-            let initial_drinks = [
-                {
-                    id: 'coffee',
-                    image: 'img/coffee.jpg',
-                    title: 'Kaffee',
-                    description: 'Creme / Espresso',
-                    price: 0.20,
-                    consumed: 0
-                },
-                {
-                    id: 'doublecoffee',
-                    image: 'img/doublecoffee.jpg',
-                    title: 'Creme / Espresso',
-                    description: 'mit Milch',
-                    price: 0.25,
-                    consumed: 0
-                },
-                {
-                    id: 'water',
-                    image: 'img/water.jpg',
-                    title: 'Wasser',
-                    description: 'Eine Flasche Wasser',
-                    price: 0.80,
-                    consumed: 0
-                },
-                {
-                    id: 'coke',
-                    image: 'img/coke.jpg',
-                    title: 'Coke',
-                    description: 'Eine Flasche Cola',
-                    price: 1.25,
-                    consumed: 0
-                },
-                {
-                    id: 'redbull',
-                    image: 'img/redbull.jpg',
-                    title: 'Red Bull',
-                    description: 'Eine Flasche Red Bull',
-                    price: 1.50,
-                    consumed: 0
-                }
-            ];
-            for(let i=0; i<initial_drinks.length; i++) {
-              this.storage.addDrink(initial_drinks[i]);
-              this.drinks.push(initial_drinks[i]);
-            }
+        this.refreshDrinksFromDatabase();
+    }
+
+    refreshDrinksFromDatabase() {
+      this.storage.getDrinks().then((result) => {
+        if (result.res.rows.length == 0) {
+          console.log("Found no drinks in database, inserting default set of beverages.");
+          let initial_drinks = [
+              {
+                  id: 'coffee',
+                  image: 'img/coffee.jpg',
+                  title: 'Kaffee',
+                  description: 'Creme / Espresso',
+                  price: 0.20,
+                  consumed: 0
+              },
+              {
+                  id: 'doublecoffee',
+                  image: 'img/doublecoffee.jpg',
+                  title: 'Creme / Espresso',
+                  description: 'mit Milch',
+                  price: 0.25,
+                  consumed: 0
+              },
+              {
+                  id: 'water',
+                  image: 'img/water.jpg',
+                  title: 'Wasser',
+                  description: 'Eine Flasche Wasser',
+                  price: 0.80,
+                  consumed: 0
+              },
+              {
+                  id: 'coke',
+                  image: 'img/coke.jpg',
+                  title: 'Coke',
+                  description: 'Eine Flasche Cola',
+                  price: 1.25,
+                  consumed: 0
+              },
+              {
+                  id: 'redbull',
+                  image: 'img/redbull.jpg',
+                  title: 'Red Bull',
+                  description: 'Eine Flasche Red Bull',
+                  price: 1.50,
+                  consumed: 0
+              }
+          ];
+          for(let i=0; i<initial_drinks.length; i++) {
+            this.storage.addDrink(initial_drinks[i]);
+            this.drinks.push(initial_drinks[i]);
           }
-          else {
-            console.log("Found drinks in database");
-            for(let i=0; i<result.res.rows.length; i++) {
-              let drink = result.res.rows.item(i);
-              this.drinks.push({id: drink.id,
-                image: drink.image,
-                title: drink.title,
-                description: drink.description,
-                price: drink.price,
-                consumed: drink.consumed});
-            }
+        }
+        else {
+          console.log("Found drinks in database");
+          for(let i=0; i<result.res.rows.length; i++) {
+            let drink = result.res.rows.item(i);
+            this.drinks.push({id: drink.id,
+              image: drink.image,
+              title: drink.title,
+              description: drink.description,
+              price: drink.price,
+              consumed: drink.consumed});
           }
-        });
+        }
+      });
     }
 
     getDrinks() {

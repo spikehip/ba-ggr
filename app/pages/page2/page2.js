@@ -15,13 +15,13 @@ export class Page2 {
 		this.storage = database;
 		this.storage.get('balance').then((balance) => {
 			this.balance = Number(balance == null?0:balance);
-		});		
+		});
 	}
 
 	setBalance() {
 		if ( Number(this.newBalance) > 0) {
 			this.balance = Number(this.newBalance);
-			this.storage.set('balance', this.newBalance);				
+			this.storage.set('balance', this.newBalance);
 		}
 	}
 
@@ -36,7 +36,8 @@ export class Page2 {
 		this.balance = 0;
 		this.storage.set('balance', 0);
 		for (let i=0; i<this.drinks.length; i++) {
-			this.storage.set(this.drinks[i].id, 0);
+			this.storage.updateDrinkConsumption(this.drinks[i].id, 0);
+      this.drinks[i].consumed = 0;
 		}
 	}
 
