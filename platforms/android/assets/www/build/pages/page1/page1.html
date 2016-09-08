@@ -18,21 +18,21 @@
       </h2>
       <p>{{drink.description}} - {{drink.price}} €</p>
     </ion-item>
-    
+
     <ion-card-content>
       <p>
-        {{drink.consumed}} getrunken        
+        {{drink.consumed}} getrunken
       </p>
     </ion-card-content>
 
     <ion-item>
-        <button primary clear item-left (click)="remove(drink)">
+        <button large primary clear item-left (click)="remove(drink)">
           <ion-icon name="remove"></ion-icon>
         </button>
-        <button primary clear item-right (click)="add(drink)">
+        <button large primary clear item-right (click)="add(drink)">
           <ion-icon name="add"></ion-icon>
         </button>
-      </ion-item>    
+      </ion-item>
   </ion-card>
 
 </ion-content>
