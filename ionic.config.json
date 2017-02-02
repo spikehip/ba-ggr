@@ -1,5 +1,6 @@
 {
   "name": "BA-GGR",
   "app_id": "af79c753",
-  "v2": true
+  "v2": true,
+  "typescript": true
 }

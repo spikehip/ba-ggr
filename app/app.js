@@ -1,16 +1,15 @@
-import {App, Platform} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
-import {TabsPage} from './pages/tabs/tabs';
-import {Drinks} from './providers/drinks';
-import {StatisticProvider} from './providers/statisticprovider';
-import {DatabaseProvider} from './providers/databaseprovider';
-
+import 'reflect-metadata';
+import { App, Platform } from 'ionic-angular';
+import { StatusBar } from 'ionic-native';
+import { TabsPage } from './pages/tabs/tabs';
+import { Drinks } from './providers/drinks';
+import { StatisticProvider } from './providers/statisticprovider';
+import { DatabaseProvider } from './providers/databaseprovider';
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
   providers: [Drinks, StatisticProvider, DatabaseProvider],
-  config: {
-  } // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {}
 })
 export class MyApp {
   static get parameters() {

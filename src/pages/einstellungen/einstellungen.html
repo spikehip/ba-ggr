@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Einstellungen
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button outline large (click)="add()">
+        <ion-icon name="ios-add-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list #list>
+
+    <ion-item-sliding #item template="ngFor let drink of drinks;">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/{{drink.image}}" />
+        </ion-avatar>
+        <h2>{{drink.title}}</h2>
+        <small>{{drink.price}} &euro;</small>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button (click)="edit(drink, item)">
+          <ion-icon name='ios-more'></ion-icon>
+          Bearbeiten
+        </button>
+        <button ion-button color="danger" (click)="remove(drink, item)">
+          <ion-icon name='close'></ion-icon>
+          Entfernen
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+</ion-content>

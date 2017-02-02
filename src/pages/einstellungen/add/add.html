@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar position="top">
+    <ion-title>{{modalTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Titel</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="drink.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Beschreibung</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="drink.description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Preis</ion-label>
+      <ion-input type="number" [(ngModel)]="drink.price"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Bild</ion-label>
+        <ion-select [(ngModel)]="drink.image">
+          <ion-option value="img/coffee.jpg">Tasse</ion-option>
+          <ion-option value="img/doublecoffee.jpg">Zwei Tassen</ion-option>
+          <ion-option value="img/water.jpg">Flasche</ion-option>
+          <ion-option value="img/coke.jpg">Colaflasche</ion-option>
+          <ion-option value="img/redbull.jpg">Redbull-Dose</ion-option>
+        </ion-select>
+      </ion-item>
+
+  </ion-list>
+
+  <ion-grid>
+    <ion-row center>
+      <ion-col width-50 style="text-align: center;">
+        <button ion-button round outline color="secondary" (click)="save()">Speichern</button>
+      </ion-col>
+      <ion-col width-50 style="text-align: center;">
+        <button ion-button round outline color="danger" (click)="dismiss()">Verwerfen</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
