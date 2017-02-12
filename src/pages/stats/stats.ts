@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DrinkService } from '../../services/drinks';
 
@@ -6,18 +6,15 @@ import { DrinkService } from '../../services/drinks';
   selector: 'page-stats',
   templateUrl: 'stats.html'
 })
-export class StatsPage {
+export class StatsPage implements OnInit {
   drinks:Array<any>;
+  drinkService:DrinkService;
   statsAvailable:boolean;
   stats2Available:boolean;
   notEnoughChartData:boolean;
 
-  constructor(public navCtrl: NavController,public _drinkService:DrinkService) {
-    this.drinks = [{title:'',consumed: 0},{title:'',consumed:0},{title:'',consumed:0}];
-    this.statsAvailable=false;
-    this.stats2Available=false;
-    this.notEnoughChartData=false;
-    _drinkService.getDrinks().then((result) => {
+  ngOnInit() {
+    this.drinkService.getDrinks().then((result) => {
       this.drinks = result.slice();
       this.drinks.sort(function(a,b){
         if (a.consumed > b.consumed) return -1;
@@ -28,6 +25,14 @@ export class StatsPage {
         this.statsAvailable=true;
       }
     });
+  }
+
+  constructor(public navCtrl: NavController,public _drinkService:DrinkService) {
+    this.drinks = [];
+    this.drinkService=_drinkService;
+    this.statsAvailable=false;
+    this.stats2Available=false;
+    this.notEnoughChartData=false;
   }
 
   refresh() {

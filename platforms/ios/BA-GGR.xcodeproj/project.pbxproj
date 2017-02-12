@@ -209,7 +209,7 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = UAD5KHP9UP;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -307,9 +307,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = UAD5KHP9UP;
+				DEVELOPMENT_TEAM = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -320,8 +320,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hu.bikeonet.baggr;
 				PRODUCT_NAME = "BA-GGR";
-				PROVISIONING_PROFILE = "a8188648-933a-49c8-8f02-35e77095b847";
-				PROVISIONING_PROFILE_SPECIFIER = "BAGGR Distribution Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -334,8 +334,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = UAD5KHP9UP;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BA-GGR/BA-GGR-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -343,8 +344,8 @@
 				INFOPLIST_FILE = "BA-GGR/BA-GGR-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = hu.bikeonet.baggr;
 				PRODUCT_NAME = "BA-GGR";
-				PROVISIONING_PROFILE = "a8188648-933a-49c8-8f02-35e77095b847";
-				PROVISIONING_PROFILE_SPECIFIER = "BAGGR Distribution Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

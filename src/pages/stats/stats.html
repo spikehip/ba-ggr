@@ -11,27 +11,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>  
+<ion-content padding>
   <ion-slides pager>
 		<ion-slide>
 			<h2>Top 3 aktuell</h2>
-			<div [hidden]="!statsAvailable">
-				<ion-item>
-				  <ion-icon name="podium" item-left></ion-icon>
-				  {{drinks[0].title}}
-	  			  <ion-badge item-right danger>{{drinks[0].consumed}}</ion-badge>
-				</ion-item>
-				<ion-item [hidden]="drinks[1].consumed < 1">
-				  <ion-icon name="podium" item-left></ion-icon>
-				  {{drinks[1].title}}
-	  			  <ion-badge item-right secondary>{{drinks[1].consumed}}</ion-badge>
-				</ion-item>
-				<ion-item [hidden]="drinks[2].consumed < 1">
-				  <ion-icon name="podium" item-left></ion-icon>
-				  {{drinks[2].title}}
-	  			  <ion-badge item-right >{{drinks[2].consumed}}</ion-badge>
-				</ion-item>
-			</div>
+      <div *ngIf="statsAvailable">
+  			<div [hidden]="!statsAvailable">
+  				<ion-item *ngIf="drinks?.length > 0">
+  				  <ion-icon name="podium" item-left></ion-icon>
+  				  {{drinks[0].title}}
+  	  			  <ion-badge item-right danger>{{drinks[0].consumed}}</ion-badge>
+  				</ion-item>
+  				<ion-item *ngIf="drinks?.length > 1">
+  				  <ion-icon name="podium" item-left></ion-icon>
+  				  {{drinks[1].title}}
+  	  			  <ion-badge item-right secondary>{{drinks[1].consumed}}</ion-badge>
+  				</ion-item>
+  				<ion-item *ngIf="drinks?.length > 2">
+  				  <ion-icon name="podium" item-left></ion-icon>
+  				  {{drinks[2].title}}
+  	  			  <ion-badge item-right >{{drinks[2].consumed}}</ion-badge>
+  				</ion-item>
+  			</div>
+      </div>
 			<div [hidden]="statsAvailable">
 				<small>Leider stehen ungenügende Daten zu Verfügung.</small>
 			</div>
