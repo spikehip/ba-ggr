@@ -26,6 +26,6 @@ to track and sum up the consumption of different beverages in the kitchen.
 
 ## Screenshots
 
-![screen 1] (img/screen_1_res.png) 
-![screen 2] (img/screen_2_res.png)
+![screen 1](./img/screen_1_res.png) 
+![screen 2](./img/screen_2_res.png)
 
