@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Drink } from './drink';
 import { InitialDrinks } from './initial_drinks'
-import { Storage } from '@ionic/storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @Injectable()
 export class DrinkService {
 
   drinks:Array<Drink> = [];
-  storage:Storage;
+  storage:NativeStorage;
 
-  constructor(public _storage:Storage) {
+  constructor(public _storage:NativeStorage) {
     this.storage = _storage;
-    this.storage.get('drinks').then((json) => {
+    this.storage.getItem('drinks').then((json) => {
       let data = JSON.parse(json);
       console.log("Loading drinks from storage: ",json);
       if (data == null || (data != null && data.length <= 0) ) {
@@ -30,6 +30,6 @@ export class DrinkService {
   }
 
   saveDrinks(drinks:Drink[]): Promise<any> {
-    return this.storage.set('drinks', JSON.stringify(drinks));
+    return this.storage.setItem('drinks', JSON.stringify(drinks));
   }
 }

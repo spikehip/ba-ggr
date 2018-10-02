@@ -1,3 +1,4 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -11,7 +12,12 @@ import { AddDrinkPage } from '../pages/einstellungen/add/add';
 import { BalanceService } from '../services/balance';
 import { DrinkService } from '../services/drinks';
 import { StorageService } from '../services/storage';
-import { Storage } from '@ionic/storage';
+import { NativeStorage } from '@ionic-native/native-storage';
+
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+
+import { SQLite } from '@ionic-native/sqlite';
 
 @NgModule({
   declarations: [
@@ -24,6 +30,7 @@ import { Storage } from '@ionic/storage';
     AddDrinkPage
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -41,7 +48,10 @@ import { Storage } from '@ionic/storage';
     BalanceService,
     DrinkService,
     StorageService,
-    Storage
+    NativeStorage,
+    StatusBar,
+    SplashScreen,
+    SQLite
   ]
 })
 export class AppModule {}

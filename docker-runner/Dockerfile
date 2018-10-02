@@ -2,7 +2,7 @@ FROM node
 MAINTAINER Andras Bekesi <andras.bekesi@bikeonet.hu>
 USER root
 
-RUN npm -g install ionic@beta
+RUN npm -g install ionic
 RUN npm -g install cordova
 RUN mkdir -p /app
 
