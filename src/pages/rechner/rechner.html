@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content padding class="page-rechner">
-  <ion-card template="ngFor let drink of drinks;">
+  <ion-card *ngFor="let drink of drinks">
     <ion-item>
       <ion-avatar item-left><img src="assets/{{drink.image}}"/></ion-avatar>
       <h2 class="card-title">

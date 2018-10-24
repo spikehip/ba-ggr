@@ -1,0 +1,36 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        },
+        "cordova-plugin-ionic-keyboard": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        },
+        "cordova-plugin-ionic-webview": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        },
+        "cordova-plugin-nativestorage": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "hu.bikeonet.baggr"
+        }
+    },
+    "dependent_plugins": {}
+}

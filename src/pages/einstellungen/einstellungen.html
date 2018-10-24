@@ -14,7 +14,7 @@
 <ion-content padding>
   <ion-list #list>
 
-    <ion-item-sliding #item template="ngFor let drink of drinks;">
+    <ion-item-sliding #item *ngFor="let drink of drinks">
       <ion-item>
         <ion-avatar item-left>
           <img src="assets/{{drink.image}}" />

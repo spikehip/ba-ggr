@@ -25,11 +25,11 @@ export class RechnerPage {
     this.sql  = sqlStorage;
     this.store = keyValueStore;
     this.drinkService=_drinkService;
-    // _drinkService.getDrinks().then((result) => {
-    //   console.log(result);
-    //   this.drinks = result;
-    // });
-    // this.refresh();
+     _drinkService.getDrinks().then((result) => {
+       console.log(result);
+       this.drinks = result;
+     });
+     this.refresh();
   }
 
   refresh() {
